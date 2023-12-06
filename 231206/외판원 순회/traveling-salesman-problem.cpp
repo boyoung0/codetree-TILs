@@ -12,7 +12,7 @@ int mini = INT_MAX;
 int CalCost()
 {
     int res = 0;
-    
+
     for (int i = 1; i < (int)v.size(); i++)
     {
         res += cost[v[i - 1]][v[i]];
@@ -26,6 +26,7 @@ void Permut(int cnt, int last)
 {
     if (cnt == n)
     {
+        if (cost[v.back()][0] == 0) return;
         v.push_back(0);
         int ret = CalCost();
         v.pop_back();
@@ -37,7 +38,7 @@ void Permut(int cnt, int last)
     {
         if (visited[i] == 1) continue;
         //0이동 불가능
-        if(cost[last][i] == 0) continue;
+        if (cost[last][i] == 0) continue;
 
         v.push_back(i);
         visited[i] = 1;
@@ -60,7 +61,7 @@ int main() {
         }
     }
 
-    v.push_back(0);
+    v.push_back(0); visited[0] = 1;
     Permut(1, 0); //0번 지점은 고른셈
     v.pop_back();
 
