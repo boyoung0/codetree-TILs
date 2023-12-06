@@ -12,7 +12,7 @@ int mini = INT_MAX;
 int CalCost()
 {
     int res = 0;
-    //0번지점 출발 + 도착
+    
     for (int i = 1; i < (int)v.size(); i++)
     {
         res += cost[v[i - 1]][v[i]];
@@ -22,7 +22,7 @@ int CalCost()
 }
 
 //0~n-1까지 고르는 순열
-void Permut(int cnt)
+void Permut(int cnt, int last)
 {
     if (cnt == n)
     {
@@ -36,9 +36,14 @@ void Permut(int cnt)
     for (int i = 1; i < n; i++)
     {
         if (visited[i] == 1) continue;
+        //0이동 불가능
+        if(cost[last][i] == 0) continue;
+
         v.push_back(i);
         visited[i] = 1;
-        Permut(cnt + 1);
+
+        Permut(cnt + 1, i);
+
         visited[i] = 0;
         v.pop_back();
     }
@@ -56,8 +61,9 @@ int main() {
     }
 
     v.push_back(0);
-    Permut(1); //0번 지점은 고른셈
+    Permut(1, 0); //0번 지점은 고른셈
     v.pop_back();
+
     cout << mini;
     return 0;
 }
