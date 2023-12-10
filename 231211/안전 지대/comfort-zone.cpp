@@ -117,6 +117,7 @@ int main() {
         k++;
     }
 
+    if(ans_k == 100) ans_k = 1;
     cout << ans_k << " " << ans_safe;
 
     return 0;
